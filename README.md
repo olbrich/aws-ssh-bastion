@@ -9,6 +9,13 @@ This can be incorporated into your ~/.ssh/config so that you can seemlessly ssh 
 
 compile the go tool and make sure it's in your path.  It looks for the usual AWS environment variables to authenticate.
 
+Usage
+=====
+
+    aws -l          #=> list all instances -- only us.east right now.
+    aws <name>      #=> return private IP
+    aws -p <name>   #=> return public IP of instance
+
 Examples
 ========
 
