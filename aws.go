@@ -86,11 +86,14 @@ func list() {
 		fmt.Fprintf(os.Stderr, err.Error()+"\n")
 		os.Exit(1)
 	}
+  fmt.Printf("%s+%s+%s+%s+%s+\n",strings.Repeat("-",40), strings.Repeat("-",12), strings.Repeat("-",14),strings.Repeat("-",20),strings.Repeat("-",20))
+  fmt.Printf("%-40s|%-12s|%-14s|%-20s|%-20s|\n","Name","Id","Status","Private IP","Public IP")
+  fmt.Printf("%s+%s+%s+%s+%s+\n",strings.Repeat("-",40), strings.Repeat("-",12), strings.Repeat("-",14),strings.Repeat("-",20),strings.Repeat("-",20))
 	for _, instance := range instances {
 		tags := make(map[string]string)
 		for _, tag := range instance.Tags {
 			tags[tag.Key] = tag.Value
 		}
-		fmt.Printf("%-40s %-10s %-10s %-20s %-20s\n", tags["Name"], instance.InstanceId, colorStatus(instance.State.Name), instance.PrivateIpAddress, instance.PublicIpAddress)
+		fmt.Printf("%-40s %-12s %-25s %-20s %-20s\n", tags["Name"], instance.InstanceId, colorStatus(instance.State.Name), instance.PrivateIpAddress, instance.PublicIpAddress)
 	}
 }
