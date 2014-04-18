@@ -15,6 +15,8 @@ Usage
     aws -l          #=> list all instances -- only us.east right now.
     aws <name>      #=> return private IP
     aws -p <name>   #=> return public IP of instance
+    aws -n2 <name>  #=> return nth instance with same name
+    aws <name>#n    #=> return nth instance with same name
 
 Examples
 ========
@@ -30,7 +32,7 @@ Examples
       HostbasedAuthentication yes
       ProxyCommand ssh -A -l 'user' -q -p '%p' $(aws -p %h) -W $(aws %h):%p
     # pull name of environment from the hostname and use that bastion as a gateway
-    # example: staging-web would try to ssh through the 'staging-bastion' to the instance named 'staging-web' 
+    # example: staging-web would try to ssh through the 'staging-bastion' to the instance named 'staging-web'
     Host *-*
       User user
       HostbasedAuthentication yes
