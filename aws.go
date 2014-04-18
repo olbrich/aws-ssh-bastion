@@ -3,9 +3,9 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/mgutz/ansi"
 	"github.com/mitchellh/goamz/aws"
 	"github.com/mitchellh/goamz/ec2"
-  "github.com/mgutz/ansi"
 	"os"
 	"strconv"
 	"strings"
@@ -71,13 +71,13 @@ func getInstances(name string) (instances []ec2.Instance, err error) {
 	return instances, err2
 }
 
-func colorStatus(word string) (string) {
-  if word == "running" {
-    return ansi.Color("running", "green+b")
-  } else if word == "stopped" {
-    return ansi.Color("stopped", "red+b")
-}
-return word
+func colorStatus(word string) string {
+	if word == "running" {
+		return ansi.Color("running", "green+b")
+	} else if word == "stopped" {
+		return ansi.Color("stopped", "red+b")
+	}
+	return word
 }
 
 func list() {
@@ -86,9 +86,9 @@ func list() {
 		fmt.Fprintf(os.Stderr, err.Error()+"\n")
 		os.Exit(1)
 	}
-  fmt.Printf("%s+%s+%s+%s+%s+\n",strings.Repeat("-",40), strings.Repeat("-",12), strings.Repeat("-",14),strings.Repeat("-",20),strings.Repeat("-",20))
-  fmt.Printf("%-40s|%-12s|%-14s|%-20s|%-20s|\n","Name","Id","Status","Private IP","Public IP")
-  fmt.Printf("%s+%s+%s+%s+%s+\n",strings.Repeat("-",40), strings.Repeat("-",12), strings.Repeat("-",14),strings.Repeat("-",20),strings.Repeat("-",20))
+	fmt.Printf("%s+%s+%s+%s+%s+\n", strings.Repeat("-", 40), strings.Repeat("-", 12), strings.Repeat("-", 14), strings.Repeat("-", 20), strings.Repeat("-", 20))
+	fmt.Printf("%-40s|%-12s|%-14s|%-20s|%-20s|\n", "Name", "Id", "Status", "Private IP", "Public IP")
+	fmt.Printf("%s+%s+%s+%s+%s+\n", strings.Repeat("-", 40), strings.Repeat("-", 12), strings.Repeat("-", 14), strings.Repeat("-", 20), strings.Repeat("-", 20))
 	for _, instance := range instances {
 		tags := make(map[string]string)
 		for _, tag := range instance.Tags {
